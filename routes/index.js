@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+const router = express.Router();
 
 /* Redirect to home */
 router.get('/', function (req, res) {
@@ -26,4 +26,4 @@ router.get('/register', function (req, res) {
   res.send('NOT IMPLEMENTED: GET Register Page');
 });
 
-module.exports = router;
+export default router;
