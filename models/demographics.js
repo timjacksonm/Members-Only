@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const DemographicsSchema = new mongoose.Schema({
   firstname: {
@@ -24,7 +24,9 @@ const DemographicsSchema = new mongoose.Schema({
     minLength: 2,
     maxLength: 2,
   },
-  country: { type: String, trim: true, minLength: 4, maxLength: 56 },
+  country: { type: String, trim: true, minLength: 2, maxLength: 56 },
 });
 
-module.exports = mongoose.model('Demographics', DemographicsSchema);
+const Demographics = mongoose.model('Demographics', DemographicsSchema);
+
+export default Demographics;

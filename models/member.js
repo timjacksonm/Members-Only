@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const MemberSchema = new mongoose.Schema({
   demographics: {
@@ -11,4 +11,6 @@ const MemberSchema = new mongoose.Schema({
   status: { type: String, required: true, enum: ['Club Member', 'Member'] },
 });
 
-module.exports = mongoose.model('Member', MemberSchema);
+const Member = mongoose.model('Member', MemberSchema);
+
+export default Member;

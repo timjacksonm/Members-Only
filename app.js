@@ -1,19 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-require('dotenv').config();
+import createError from 'http-errors';
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import dotenv from 'dotenv';
+dotenv.config();
 
-var indexRouter = require('./routes/index');
+import indexRouter from './routes/index';
 
-var app = express();
+const app = express();
 
 //Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = process.env.PROD_DB_URL || process.env.DEV_DB_URL;
+import mongoose from 'mongoose';
+const mongoDB = process.env.PROD_DB_URL || process.env.DEV_DB_URL;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
@@ -43,5 +44,3 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-module.exports = app;
