@@ -1,0 +1,15 @@
+<%- include('header') -%>
+<main>
+  <form action="/login" method="POST">
+    <label for="username">Username:</label>
+    <input name="username" placeholder="username" type="text" />
+    <label for="password">Password:</label>
+    <input name="password" type="password" />
+    <button type="submit">Log In</button>
+  </form>
+  <div class="flex">
+    <p>Don't have an account?</p>
+    <a href="/signup"><p>Sign up</p></a>
+  </div>
+</main>
+<%- include('footer') -%>

@@ -4,7 +4,6 @@ const MemberSchema = new mongoose.Schema({
   demographics: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Demographics',
-    required: true,
   },
   username: { type: String, required: true, lowercase: true, trim: true },
   password: { type: String, required: true, trim: true },
