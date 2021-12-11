@@ -1,9 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
+/* Redirect to home */
+router.get('/', function (req, res) {
+  res.redirect('/home');
+});
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/home', function (req, res) {
+  res.send('NOT IMPLEMENTED: GET Home Page');
+});
+
+/* GET comments page. */
+router.get('/comments', function (req, res) {
+  res.send('NOT IMPLEMENTED: GET Comments Page');
+});
+
+/* GET login page. */
+router.get('/login', function (req, res) {
+  res.send('NOT IMPLEMENTED: GET Login Page');
+});
+
+/* GET register page. */
+router.get('/register', function (req, res) {
+  res.send('NOT IMPLEMENTED: GET Register Page');
 });
 
 module.exports = router;
