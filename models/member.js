@@ -13,7 +13,11 @@ const MemberSchema = new mongoose.Schema({
 MemberSchema.statics = {
   isUniqueEmail(string) {
     return this.find({ email: string }).then((result) => {
-      if (result) throw new Error('Email already in use');
+      if (result.length) {
+        throw new Error('Email already in use');
+      } else {
+        return false;
+      }
     });
   },
 };

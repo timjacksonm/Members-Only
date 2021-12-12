@@ -45,9 +45,9 @@ router.get('/signup', function (req, res) {
 /* POST signup page. */
 router.post(
   '/signup',
+  validate('createMember'),
   validate('createDemographic'),
   createDemographic,
-  validate('createMember'),
   createMember
 );
 
