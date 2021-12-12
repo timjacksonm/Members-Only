@@ -4,22 +4,6 @@ export const validate = (method) => {
   switch (method) {
     case 'createDemographic': {
       return [
-        body('email')
-          .isEmail()
-          .withMessage('Email value is not a valid email address.')
-          .normalizeEmail({ all_lowercase: true })
-          .trim(),
-        body('password')
-          .isStrongPassword({
-            minLength: 8,
-            minLowercase: 1,
-            minUppercase: 1,
-            minNumbers: 1,
-          })
-          .withMessage(
-            'Password must be a minimum length of 8 characters, contain atleast 1 lowercase letter, uppercase letter and a number.'
-          )
-          .trim(),
         body('firstname')
           .optional({ checkFalsy: true })
           .isLength({ min: 1, max: 30 })
@@ -56,7 +40,24 @@ export const validate = (method) => {
       ];
     }
     case 'createMember': {
-      return [];
+      return [
+        body('email')
+          .isEmail()
+          .withMessage('Email value is not a valid email address.')
+          .normalizeEmail({ all_lowercase: true })
+          .trim(),
+        body('password')
+          .isStrongPassword({
+            minLength: 8,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+          })
+          .withMessage(
+            'Password must be a minimum length of 8 characters, contain atleast 1 lowercase letter, uppercase letter and a number.'
+          )
+          .trim(),
+      ];
     }
   }
 };

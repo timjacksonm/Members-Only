@@ -23,7 +23,7 @@ export const createDemographic = async (req, res, next) => {
       state: state,
       country: country,
     });
-    req.locals.demographicId = reference;
+    res.locals.demographicId = reference;
     next();
   } catch (err) {
     return next(err);
