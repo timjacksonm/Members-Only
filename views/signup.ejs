@@ -1,22 +1,29 @@
 <%- include('header') -%>
 <main>
-  <% if (error) { %>
-  <p><%= inputName %>: <%= message %></p>
+  <% if (errors) { %>
+  <div>
+    <% Object.keys(errors).forEach(function(key) { %>
+    <div class="flex">
+      <p class="error">Please update <%= errors[key].param %>:&nbsp;</p>
+      <p><%= errors[key].msg %></p>
+    </div>
+    <% }); %>
+  </div>
   <% } %>
   <form action="/signup" method="POST" class="form-center">
     <div class="form-grid">
       <div class="form-fields">
-        <label for="username">Username:</label>
-        <% if (username) { %>
+        <label for="email">Email:</label>
+        <% if (email) { %>
         <input
-          name="username"
+          name="email"
           autocomplete="off"
           type="text"
-          value="<%= username %>"
+          value="<%= email %>"
           required
         />
         <% } else{ %>
-        <input name="username" autocomplete="off" type="text" required />
+        <input name="email" autocomplete="off" type="text" required />
         <% } %>
       </div>
       <div class="form-fields">
@@ -34,7 +41,7 @@
         <% } %>
       </div>
       <div class="form-fields">
-        <label for="firstName">First Name:</label>
+        <label for="firstname">First Name:</label>
         <% if (firstname) { %>
         <input
           name="firstname"
@@ -43,20 +50,20 @@
           value="<%= firstname %>"
         />
         <% } else{ %>
-        <input name="firstName" autocomplete="off" type="text" />
+        <input name="firstname" autocomplete="off" type="text" />
         <% } %>
       </div>
       <div class="form-fields">
-        <label for="lastName">Last Name:</label>
+        <label for="lastname">Last Name:</label>
         <% if (lastname) { %>
         <input
-          name="lastName"
+          name="lastname"
           autocomplete="off"
           type="text"
           value="<%= lastname %>"
         />
         <% } else{ %>
-        <input name="lastName" autocomplete="off" type="text" />
+        <input name="lastname" autocomplete="off" type="text" />
         <% } %>
       </div>
       <div class="form-fields">
@@ -66,7 +73,7 @@
           name="state"
           autocomplete="off"
           type="text"
-          value="<%= lastname %>"
+          value="<%= state %>"
         />
         <% } else{ %>
         <input name="state" autocomplete="off" type="text" />

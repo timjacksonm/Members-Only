@@ -1,0 +1,62 @@
+import { body } from 'express-validator';
+
+export const validate = (method) => {
+  switch (method) {
+    case 'createDemographic': {
+      return [
+        body('email')
+          .isEmail()
+          .withMessage('Email value is not a valid email address.')
+          .normalizeEmail({ all_lowercase: true })
+          .trim(),
+        body('password')
+          .isStrongPassword({
+            minLength: 8,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+          })
+          .withMessage(
+            'Password must be a minimum length of 8 characters, contain atleast 1 lowercase letter, uppercase letter and a number.'
+          )
+          .trim(),
+        body('firstname')
+          .optional({ checkFalsy: true })
+          .isLength({ min: 1, max: 30 })
+          .withMessage(
+            'First name must be between 1 and 30 characters in length.'
+          )
+          .isAlpha()
+          .withMessage('Name must be alphabet letters.')
+          .trim(),
+        body('lastname')
+          .optional({ checkFalsy: true })
+          .isLength({ min: 1, max: 30 })
+          .withMessage(
+            'Last name must be between 1 and 30 characters in length.'
+          )
+          .isAlpha()
+          .withMessage('Name must be alphabet letters.')
+          .trim(),
+        body('state')
+          .optional({ checkFalsy: true })
+          .isLength({ min: 2, max: 2 })
+          .withMessage('State must be abbreviated and 2 characters in length.')
+          .isAlpha()
+          .withMessage('State must be alphabet letters.')
+          .toUpperCase()
+          .trim(),
+        body('country')
+          .optional({ checkFalsy: true })
+          .isLength({ min: 2, max: 56 })
+          .withMessage('Country must be between 2 and 56 characters in length.')
+          .isAlpha('en-US', { ignore: ' ' })
+          .withMessage('Country must be alphabet letters.')
+          .trim(),
+      ];
+    }
+    case 'createMember': {
+      return [];
+    }
+  }
+};

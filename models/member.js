@@ -5,7 +5,7 @@ const MemberSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Demographics',
   },
-  username: { type: String, required: true, lowercase: true, trim: true },
+  email: { type: String, required: true, lowercase: true, trim: true },
   password: { type: String, required: true, trim: true },
   status: { type: String, required: true, enum: ['Club Member', 'Member'] },
 });

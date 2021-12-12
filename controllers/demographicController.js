@@ -1,57 +1,28 @@
 import Demographics from '../models/demographics.js';
+import { validationResult } from 'express-validator';
 
 export const createDemographic = async (req, res, next) => {
-  const { username, password, firstName, lastName, state, country } = req.body;
-  try {
+  const errors = validationResult(req);
+  const { email, password, firstname, lastname, state, country } = req.body;
+  if (errors.isEmpty()) {
     const reference = await Demographics.create({
-      firstname: firstName,
-      lastname: lastName,
+      firstname: firstname,
+      lastname: lastname,
       state: state,
       country: country,
     });
     res.locals.demographicId = reference;
     next();
-  } catch (e) {
-    let props;
-    switch (Object.keys(e.errors)[0]) {
-      case 'firstname':
-        props = {
-          inputName: 'First Name',
-          message: e.errors.firstname.message.split(') ')[1],
-        };
-        break;
-      case 'lastname':
-        props = {
-          inputName: 'Last Name',
-          message: e.errors.lastname.message.split(') ')[1],
-        };
-        break;
-      case 'state':
-        props = {
-          inputName: 'State',
-          message: e.errors.state.message.split(') ')[1],
-        };
-        break;
-      case 'country':
-        props = {
-          inputName: 'Country',
-          message: e.errors.country.message.split(') ')[1],
-        };
-        break;
-      default:
-        break;
-    }
-    res.render('signup', {
-      error: e.errors,
-      ...props,
-      ...{
-        username: username,
-        password: password,
-        firstname: firstName,
-        lastname: lastName,
-        state: state,
-        country: country,
-      },
+  }
+  if (!errors.isEmpty()) {
+    return res.render('signup', {
+      errors: errors.array(),
+      email: email,
+      password: password,
+      firstname: firstname,
+      lastname: lastname,
+      state: state,
+      country: country,
     });
   }
 };

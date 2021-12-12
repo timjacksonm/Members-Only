@@ -1,7 +1,9 @@
 import express from 'express';
 import passport from 'passport';
+import { validate } from '../middleware/validatesanitize.js';
 import bcrypt from 'bcrypt';
 import User from '../models/member.js';
+import { body } from 'express-validator';
 import { createMember } from '../controllers/memberController.js';
 import { createDemographic } from '../controllers/demographicController.js';
 const router = express.Router();
@@ -32,10 +34,24 @@ router.post(
 
 /* GET signup page. */
 router.get('/signup', function (req, res) {
-  res.render('signup', { error: null });
+  res.render('signup', {
+    errors: null,
+    email: null,
+    password: null,
+    firstname: null,
+    lastname: null,
+    state: null,
+    country: null,
+  });
 });
 
 /* POST signup page. */
-router.post('/signup', createDemographic, createMember);
+router.post(
+  '/signup',
+  validate('createDemographic'),
+  createDemographic,
+  validate('createMember'),
+  createMember
+);
 
 export default router;

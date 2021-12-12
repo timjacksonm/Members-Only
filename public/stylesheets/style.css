@@ -3,6 +3,7 @@ body {
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
   background-color: #12181b;
   color: #fff;
+  font-family: sans-serif;
 }
 
 header {
@@ -83,4 +84,10 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   max-width: 250px;
+}
+
+.error {
+  color: #ff1443;
+  font-weight: 700;
+  font-style: italic;
 }
