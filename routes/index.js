@@ -2,6 +2,8 @@ import express from 'express';
 import passport from 'passport';
 import bcrypt from 'bcrypt';
 import User from '../models/member.js';
+import { createMember } from '../controllers/memberController.js';
+import { createDemographic } from '../controllers/demographicController.js';
 const router = express.Router();
 
 /* Redirect to home */
@@ -30,30 +32,10 @@ router.post(
 
 /* GET signup page. */
 router.get('/signup', function (req, res) {
-  res.render('signup');
+  res.render('signup', { error: null });
 });
 
 /* POST signup page. */
-router.post('/signup', function (req, res, next) {
-  bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-    // if err, do something
-    // otherwise, store hashedPassword in DB
-    if (err) {
-      return next(err);
-    } else {
-      const user = new User({
-        username: req.body.username,
-        password: hashedPassword,
-        status: 'Club Member',
-      }).save((err) => {
-        if (err) {
-          return next(err);
-        }
-        req.user = user;
-        res.redirect('/');
-      });
-    }
-  });
-});
+router.post('/signup', createDemographic, createMember);
 
 export default router;
