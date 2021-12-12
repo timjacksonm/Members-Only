@@ -8,9 +8,20 @@
     <title>Document</title>
   </head>
   <body>
-    <header>
-      <h1>Members Only</h1>
-      <a href="/login" class='justify-content-end'>
-        <p>login</p>
-      </a>
+    <header class="justify-content-between">
+      <h1>
+        <a href="/home" class="home">Members Only</a>
+      </h1>
+      <% if (user) { %>
+      <div class="align-self-center">
+        Welcome <%= user._doc.email %>, Member Status: <%= user._doc.status %>
+      </div>
+      <p class="align-self-center">
+        <a href="/logout">logout</a>
+      </p>
+      <% } else { %>
+      <p class="align-self-center">
+        <a href="/login">login</a>
+      </p>
+      <% } %>
     </header>

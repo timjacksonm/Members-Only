@@ -60,8 +60,16 @@ button:hover {
   justify-content: center;
 }
 
+.justify-content-between {
+  justify-content: space-between;
+}
+
 .flex-direction-column {
   flex-direction: column;
+}
+
+.align-self-center {
+  align-self: center;
 }
 
 .form-center {
@@ -90,4 +98,13 @@ button:hover {
   color: #ff1443;
   font-weight: 700;
   font-style: italic;
+}
+
+.home {
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+}
+.home:hover {
+  color: #00b7ff;
 }

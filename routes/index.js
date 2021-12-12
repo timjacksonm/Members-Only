@@ -12,34 +12,49 @@ router.get('/', function (req, res) {
 
 /* GET home page. */
 router.get('/home', function (req, res) {
-  res.render('index');
+  res.render('index', { user: req.user || null });
 });
 
 /* GET login page. */
 router.get('/login', function (req, res) {
-  res.render('login');
+  if (req.user) {
+    res.redirect('/home');
+  } else {
+    res.render('login', { user: null });
+  }
 });
 
 /* POST login page. */
 router.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/',
+    successRedirect: '/home',
+    failureRedirect: '/login',
   })
 );
 
+/* POST logout. */
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/home');
+});
+
 /* GET signup page. */
 router.get('/signup', function (req, res) {
-  res.render('signup', {
-    errors: null,
-    email: null,
-    password: null,
-    firstname: null,
-    lastname: null,
-    state: null,
-    country: null,
-  });
+  if (req.user) {
+    res.redirect('/home');
+  } else {
+    res.render('signup', {
+      user: req.user || null,
+      errors: null,
+      email: null,
+      password: null,
+      firstname: null,
+      lastname: null,
+      state: null,
+      country: null,
+    });
+  }
 });
 
 /* POST signup page. */

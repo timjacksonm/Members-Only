@@ -1,4 +1,4 @@
-<%- include('header') -%>
+<%- include('header', { user: user }) -%>
 <main>
   <form action="/login" method="POST">
     <label for="username">Username:</label>
