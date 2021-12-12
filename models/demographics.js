@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const DemographicsSchema = new mongoose.Schema({
   firstname: {
     type: String,
-    required: true,
     minLength: 1,
     maxLength: 30,
     lowercase: true,
@@ -11,7 +10,6 @@ const DemographicsSchema = new mongoose.Schema({
   },
   lastname: {
     type: String,
-    required: true,
     minLength: 1,
     maxLength: 30,
     lowercase: true,

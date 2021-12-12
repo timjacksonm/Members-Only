@@ -28,13 +28,13 @@ router.post(
   })
 );
 
-/* GET register page. */
-router.get('/register', function (req, res) {
-  res.render('sign-up-form');
+/* GET signup page. */
+router.get('/signup', function (req, res) {
+  res.render('signup');
 });
 
-/* POST register page. */
-router.post('/register', function (req, res, next) {
+/* POST signup page. */
+router.post('/signup', function (req, res, next) {
   bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
     // if err, do something
     // otherwise, store hashedPassword in DB

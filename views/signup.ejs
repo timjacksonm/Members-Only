@@ -1,0 +1,33 @@
+<%- include('header') -%>
+<main>
+  <form action="/login" method="POST" class="form-center">
+    <div class="form-grid">
+      <div class="form-fields">
+        <label for="lastName">Username:</label>
+        <input name="username" autocomplete="off" type="text" />
+      </div>
+      <div class="form-fields">
+        <label for="password">Password:</label>
+        <input name="password" autocomplete="off" type="password" />
+      </div>
+      <div class="form-fields">
+        <label for="firstName">First Name:</label>
+        <input name="firstName" autocomplete="off" type="text" />
+      </div>
+      <div class="form-fields">
+        <label for="lastName">Last Name:</label>
+        <input name="state" autocomplete="off" type="text" />
+      </div>
+      <div class="form-fields">
+        <label for="state">State:</label>
+        <input name="country" autocomplete="off" type="text" />
+      </div>
+      <div class="form-fields">
+        <label for="country">Country:</label>
+        <input name="lastName" autocomplete="off" type="text" />
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</main>
+<%- include('footer') -%>

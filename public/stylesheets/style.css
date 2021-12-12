@@ -41,6 +41,7 @@ button {
   font-weight: 700;
   font-size: 16px;
 }
+
 button:hover {
   background-color: rgb(9, 195, 114);
   color: #fff;
@@ -50,6 +51,36 @@ button:hover {
   display: flex;
 }
 
-.flexend {
+.justify-content-end {
   justify-content: end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.form-center {
+  margin: auto;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 500px;
+  margin: 2em 0;
+}
+
+.form-fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 250px;
 }
