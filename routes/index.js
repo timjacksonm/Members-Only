@@ -1,9 +1,6 @@
 import express from 'express';
 import passport from 'passport';
 import { validate } from '../middleware/validatesanitize.js';
-import bcrypt from 'bcrypt';
-import User from '../models/member.js';
-import { body } from 'express-validator';
 import { createMember } from '../controllers/memberController.js';
 import { createDemographic } from '../controllers/demographicController.js';
 const router = express.Router();
