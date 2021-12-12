@@ -1,4 +1,5 @@
 import { body } from 'express-validator';
+import Member from '../models/member.js';
 
 export const validate = (method) => {
   switch (method) {
@@ -44,6 +45,8 @@ export const validate = (method) => {
         body('email')
           .isEmail()
           .withMessage('Email value is not a valid email address.')
+          .exists()
+          .custom((val) => Member.isUniqueEmail(val))
           .normalizeEmail({ all_lowercase: true })
           .trim(),
         body('password')

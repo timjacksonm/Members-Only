@@ -10,6 +10,14 @@ const MemberSchema = new mongoose.Schema({
   status: { type: String, required: true, enum: ['Club Member', 'Member'] },
 });
 
+MemberSchema.statics = {
+  isUniqueEmail(string) {
+    return this.find({ email: string }).then((result) => {
+      if (result) throw new Error('Email already in use');
+    });
+  },
+};
+
 const Member = mongoose.model('Member', MemberSchema);
 
 export default Member;
