@@ -1,5 +1,10 @@
 <%- include('header', { user: user }) -%>
 <main>
+  <% if (user) { %>
+  <a href="/newmessage" class="remove-decoration">
+    <button class="addBtn">+</button>
+  </a>
+  <% } %>
   <div>Feed</div>
 </main>
 <%- include('footer') -%>

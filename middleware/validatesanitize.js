@@ -62,5 +62,8 @@ export const validate = (method) => {
           .trim(),
       ];
     }
+    case 'createMessage': {
+      return [body('message').trim()];
+    }
   }
 };

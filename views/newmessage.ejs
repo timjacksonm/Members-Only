@@ -1,0 +1,42 @@
+<%- include('header', { user: user }) -%>
+<main>
+  <form action="/newmessage" method="POST" class="form-center">
+    <h2>Message:</h2>
+    <textarea name="message" id="msg" cols="30" rows="10"></textarea>
+    <h2>Who can see your message?</h2>
+    <% if (user.status === 'Club Member') { %>
+    <div class="viewContainer">
+      <label class="container"
+        >Public
+        <input type="radio" name="view" value="Public" />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container"
+        >Members only
+        <input type="radio" name="view" value="Members Only" />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container"
+        >Club Members only
+        <input type="radio" name="view" value="Club Members Only" />
+        <span class="checkmark"></span>
+      </label>
+    </div>
+    <% } else { %>
+    <div class="viewContainer">
+      <label class="container"
+        >Public
+        <input type="radio" name="view" value="Public" />
+        <span class="checkmark"></span>
+      </label>
+      <label class="container"
+        >Members only
+        <input type="radio" name="view" value="Members Only" />
+        <span class="checkmark"></span>
+      </label>
+    </div>
+    <% } %>
+    <button type="submit" class="submitBtn">Submit</button>
+  </form>
+</main>
+<%- include('footer') -%>
