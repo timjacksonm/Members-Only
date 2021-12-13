@@ -10,28 +10,24 @@ const MemberSchema = new mongoose.Schema({
   status: { type: String, required: true, enum: ['Club Member', 'Member'] },
 });
 
-MemberSchema.statics = {
-  isUniqueEmail(string) {
-    return this.find({ email: string }).then((result) => {
-      if (result.length) {
-        throw new Error('Email already in use');
-      } else {
-        return false;
-      }
-    });
-  },
+MemberSchema.statics.isUniqueEmail = function isUniqueEmail(string) {
+  return this.find({ email: string }).then((result) => {
+    if (result.length) {
+      throw new Error('Email already in use');
+    } else {
+      return false;
+    }
+  });
 };
 
-MemberSchema.statics = {
-  isRegisteredEmail(string) {
-    return this.find({ email: string }).then((result) => {
-      if (result.length) {
-        return true;
-      } else {
-        throw new Error('Email is not registered sign up below to proceed.');
-      }
-    });
-  },
+MemberSchema.statics.isRegisteredEmail = function isRegisteredEmail(string) {
+  return this.find({ email: string }).then((result) => {
+    if (result.length) {
+      return true;
+    } else {
+      throw new Error('Email is not registered sign up below to proceed.');
+    }
+  });
 };
 
 const Member = mongoose.model('Member', MemberSchema);
