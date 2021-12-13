@@ -1,5 +1,6 @@
 import express from 'express';
 import passport from 'passport';
+import { validationResult } from 'express-validator';
 import { validate } from '../middleware/validatesanitize.js';
 import { createMember } from '../controllers/memberController.js';
 import { createDemographic } from '../controllers/demographicController.js';
@@ -22,17 +23,45 @@ router.get('/login', function (req, res) {
   if (req.user) {
     res.redirect('/home');
   } else {
-    res.render('login', { user: null });
+    res.render('login', { user: null, errors: null, autherror: null });
   }
 });
 
 /* POST login page. */
 router.post(
   '/login',
-  passport.authenticate('local', {
-    successRedirect: '/home',
-    failureRedirect: '/login',
-  })
+  validate('login'),
+  function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('login', {
+        user: null,
+        errors: errors.array(),
+        autherror: null,
+      });
+    }
+    next();
+  },
+  function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.render('login', {
+          user: null,
+          errors: null,
+          autherror: info,
+        });
+      }
+      req.logIn(user, function (err) {
+        if (err) {
+          return next(err);
+        }
+        return res.redirect('/home');
+      });
+    })(req, res, next);
+  }
 );
 
 /* POST logout. */

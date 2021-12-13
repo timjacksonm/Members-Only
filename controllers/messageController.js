@@ -50,7 +50,6 @@ export const retrieveMessages = async (req, res, next) => {
         });
         break;
     }
-    console.log(messages);
     res.render('index', { user: req.user || null, messages: messages });
   } catch (e) {
     next(e);

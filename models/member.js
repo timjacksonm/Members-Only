@@ -22,6 +22,18 @@ MemberSchema.statics = {
   },
 };
 
+MemberSchema.statics = {
+  isRegisteredEmail(string) {
+    return this.find({ email: string }).then((result) => {
+      if (result.length) {
+        return true;
+      } else {
+        throw new Error('Email is not registered sign up below to proceed.');
+      }
+    });
+  },
+};
+
 const Member = mongoose.model('Member', MemberSchema);
 
 export default Member;

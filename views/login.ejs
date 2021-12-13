@@ -1,5 +1,20 @@
 <%- include('header', { user: user }) -%>
 <main>
+  <% if (errors) { %>
+  <div>
+    <% Object.keys(errors).forEach(function(key) { %>
+    <div class="flex">
+      <p class="error">Please update <%= errors[key].param %>:&nbsp;</p>
+      <p><%= errors[key].msg %></p>
+    </div>
+    <% }); %>
+  </div>
+  <% } %>
+  <div>
+    <% if (autherror) { %>
+    <p><%= autherror.message %></p>
+    <% } %>
+  </div>
   <form action="/login" method="POST">
     <label for="username">Username:</label>
     <input

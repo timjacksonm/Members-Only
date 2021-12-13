@@ -78,5 +78,19 @@ export const validate = (method) => {
           .trim(),
       ];
     }
+    case 'login': {
+      return [
+        body('username')
+          .notEmpty()
+          .withMessage('Enter an email address.')
+          .bail()
+          .isEmail()
+          .withMessage('Username is not in email format.')
+          .bail()
+          .custom((val) => Member.isRegisteredEmail(val))
+          .trim(),
+        body('password').notEmpty().withMessage('Enter a password.').trim(),
+      ];
+    }
   }
 };
