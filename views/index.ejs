@@ -5,6 +5,15 @@
     <button class="addBtn">+</button>
   </a>
   <% } %>
-  <div>Feed</div>
+  <div>
+    <% if (messages) { %>
+    <div>
+      <% messages.forEach(data => { %>
+      <p><%= data._doc.message %></p>
+      <p><%= data._doc.date %></p>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
 </main>
 <%- include('footer') -%>

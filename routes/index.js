@@ -3,7 +3,10 @@ import passport from 'passport';
 import { validate } from '../middleware/validatesanitize.js';
 import { createMember } from '../controllers/memberController.js';
 import { createDemographic } from '../controllers/demographicController.js';
-import { createMessage } from '../controllers/messageController.js';
+import {
+  createMessage,
+  retrieveMessages,
+} from '../controllers/messageController.js';
 const router = express.Router();
 
 /* Redirect to home */
@@ -12,9 +15,7 @@ router.get('/', function (req, res) {
 });
 
 /* GET home page. */
-router.get('/home', function (req, res) {
-  res.render('index', { user: req.user || null });
-});
+router.get('/home', retrieveMessages);
 
 /* GET login page. */
 router.get('/login', function (req, res) {
@@ -46,7 +47,7 @@ router.get('/signup', function (req, res) {
     res.redirect('/home');
   } else {
     res.render('signup', {
-      user: req.user || null,
+      user: null,
       errors: null,
       email: null,
       password: null,

@@ -8,6 +8,7 @@ export const createMember = async (req, res, next) => {
     const { email, password, firstname, lastname, state, country } = req.body;
     if (!errors.isEmpty()) {
       return res.render('signup', {
+        user: null,
         errors: errors.array(),
         email: email,
         password: password,

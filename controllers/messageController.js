@@ -1,6 +1,62 @@
 import Message from '../models/message.js';
 import { validationResult } from 'express-validator';
 
+export const retrieveMessages = async (req, res, next) => {
+  try {
+    let messages;
+    let memberStatus = req.user ? req.user.status : 'Public';
+    switch (memberStatus) {
+      case 'Club Member':
+        messages = await Message.find({
+          $and: [
+            {
+              $or: [
+                { view: 'Club Members Only' },
+                { view: 'Members Only' },
+                { view: 'Public' },
+              ],
+            },
+          ],
+        }).then((result) => {
+          if (result.length) {
+            return result;
+          }
+        });
+        break;
+      case 'Member':
+        messages = await Message.find({
+          $and: [
+            {
+              $or: [{ view: 'Members Only' }, { view: 'Public' }],
+            },
+          ],
+        }).then((result) => {
+          if (result.length) {
+            return result;
+          }
+        });
+        break;
+      case 'Public':
+        messages = await Message.find({
+          $and: [
+            {
+              $or: [{ view: 'Public' }],
+            },
+          ],
+        }).then((result) => {
+          if (result.length) {
+            return result;
+          }
+        });
+        break;
+    }
+    console.log(messages);
+    res.render('index', { user: req.user || null, messages: messages });
+  } catch (e) {
+    next(e);
+  }
+};
+
 export const createMessage = async (req, res, next) => {
   try {
     const errors = validationResult(req);

@@ -69,7 +69,7 @@ export const validate = (method) => {
           .withMessage(
             'Message must be a minimum length of 1 character and not have a maximium length greater than 50.'
           )
-          .isAlphanumeric()
+          .isAlphanumeric('en-US', { ignore: ' .' })
           .withMessage('Message must contain only letters and numbers.')
           .trim(),
         body('view')
