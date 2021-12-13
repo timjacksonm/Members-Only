@@ -63,7 +63,20 @@ export const validate = (method) => {
       ];
     }
     case 'createMessage': {
-      return [body('message').trim()];
+      return [
+        body('message')
+          .isLength({ min: 1, max: 50 })
+          .withMessage(
+            'Message must be a minimum length of 1 character and not have a maximium length greater than 50.'
+          )
+          .isAlphanumeric()
+          .withMessage('Message must contain only letters and numbers.')
+          .trim(),
+        body('view')
+          .exists()
+          .withMessage('Select who will be allowed to see your message.')
+          .trim(),
+      ];
     }
   }
 };

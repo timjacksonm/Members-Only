@@ -67,12 +67,17 @@ router.post(
   createMember
 );
 
-/* GET new post page. */
+/* GET new message page. */
 router.get('/newmessage', function (req, res, next) {
   if (req.user) {
-    res.render('newmessage', { user: req.user });
+    res.render('newmessage', {
+      user: req.user,
+      errors: null,
+      message: null,
+      view: null,
+    });
   } else {
-    res.render('/home', { user: null });
+    res.redirect('/home');
   }
 });
 

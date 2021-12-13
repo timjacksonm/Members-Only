@@ -170,7 +170,7 @@ input {
 }
 
 .container input:checked ~ .checkmark {
-  background-color: #2196f3;
+  background-color: rgb(9, 195, 114);
 }
 
 .checkmark:after {

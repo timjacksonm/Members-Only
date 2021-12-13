@@ -1,37 +1,68 @@
 <%- include('header', { user: user }) -%>
 <main>
+  <% if (errors) { %>
+  <div>
+    <% Object.keys(errors).forEach(function(key) { %>
+    <div class="flex">
+      <p class="error">Please update <%= errors[key].param %>:&nbsp;</p>
+      <p><%= errors[key].msg %></p>
+    </div>
+    <% }); %>
+  </div>
+  <% } %>
   <form action="/newmessage" method="POST" class="form-center">
     <h2>Message:</h2>
+    <% if (message) { %>
+    <textarea name="message" id="msg" cols="30" rows="10">
+<%= message %></textarea
+    >
+    <% } else { %>
     <textarea name="message" id="msg" cols="30" rows="10"></textarea>
+    <% } %>
     <h2>Who can see your message?</h2>
-    <% if (user.status === 'Club Member') { %>
+    <% if (user && user.status === 'Club Member') { %>
     <div class="viewContainer">
       <label class="container"
-        >Public
+        >Public <% if (view === 'Public') { %>
+        <input type="radio" name="view" value="Public" checked />
+        <% } else { %>
         <input type="radio" name="view" value="Public" />
+        <% } %>
         <span class="checkmark"></span>
       </label>
       <label class="container"
-        >Members only
+        >Members only <% if (view === 'Members Only') { %>
+        <input type="radio" name="view" value="Members Only" checked />
+        <% } else { %>
         <input type="radio" name="view" value="Members Only" />
+        <% } %>
         <span class="checkmark"></span>
       </label>
       <label class="container"
-        >Club Members only
+        >Club Members only <% if (view === 'Club Members Only') { %>
+        <input type="radio" name="view" value="Club Members Only" checked />
+        <% } else { %>
         <input type="radio" name="view" value="Club Members Only" />
+        <% } %>
         <span class="checkmark"></span>
       </label>
     </div>
     <% } else { %>
     <div class="viewContainer">
       <label class="container"
-        >Public
+        >Public <% if (view === 'Public') { %>
+        <input type="radio" name="view" value="Public" checked />
+        <% } else { %>
         <input type="radio" name="view" value="Public" />
+        <% } %>
         <span class="checkmark"></span>
       </label>
       <label class="container"
-        >Members only
+        >Members only <% if (view === 'Members Only') { %>
+        <input type="radio" name="view" value="Members Only" checked />
+        <% } else { %>
         <input type="radio" name="view" value="Members Only" />
+        <% } %>
         <span class="checkmark"></span>
       </label>
     </div>

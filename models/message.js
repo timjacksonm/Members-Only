@@ -11,7 +11,7 @@ const MessageSchema = new mongoose.Schema({
   view: {
     type: String,
     required: true,
-    enum: ['Club Member Only', 'Member Only', 'Public'],
+    enum: ['Club Members Only', 'Members Only', 'Public'],
   },
 });
 

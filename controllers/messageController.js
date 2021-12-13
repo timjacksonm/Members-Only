@@ -1,29 +1,25 @@
 import Message from '../models/message.js';
+import { validationResult } from 'express-validator';
 
 export const createMessage = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const { email, password, firstname, lastname, state, country } = req.body;
+    const { message, view } = req.body;
     if (!errors.isEmpty()) {
-      return res.render('signup', {
+      return res.render('newmessage', {
+        user: req.user,
         errors: errors.array(),
-        email: email,
-        password: password,
-        firstname: firstname,
-        lastname: lastname,
-        state: state,
-        country: country,
+        message: message,
+        view: view,
       });
     }
-
-    const reference = await Message.create({
-      firstname: firstname,
-      lastname: lastname,
-      state: state,
-      country: country,
+    await Message.create({
+      username: req.user._doc._id,
+      message: message,
+      date: new Date(),
+      view: view,
     });
-    res.locals.demographicId = reference;
-    next();
+    res.redirect('/home');
   } catch (err) {
     return next(err);
   }
