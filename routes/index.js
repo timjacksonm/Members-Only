@@ -23,7 +23,12 @@ router.get('/login', function (req, res) {
   if (req.user) {
     res.redirect('/home');
   } else {
-    res.render('login', { user: null, errors: null, autherror: null });
+    res.render('login', {
+      user: null,
+      errors: null,
+      autherror: null,
+      email: null,
+    });
   }
 });
 
@@ -38,6 +43,7 @@ router.post(
         user: null,
         errors: errors.array(),
         autherror: null,
+        email: req.body.username,
       });
     }
     next();
@@ -52,6 +58,7 @@ router.post(
           user: null,
           errors: null,
           autherror: info,
+          email: req.body.username,
         });
       }
       req.logIn(user, function (err) {

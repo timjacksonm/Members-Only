@@ -43,13 +43,19 @@ export const validate = (method) => {
     case 'createMember': {
       return [
         body('email')
+          .notEmpty()
+          .withMessage('Enter an email address.')
+          .bail()
           .isEmail()
           .withMessage('Email value is not a valid email address.')
-          .exists()
+          .bail()
           .custom((val) => Member.isUniqueEmail(val))
           .normalizeEmail({ all_lowercase: true })
           .trim(),
         body('password')
+          .notEmpty()
+          .withMessage('Enter a password.')
+          .bail()
           .isStrongPassword({
             minLength: 8,
             minLowercase: 1,

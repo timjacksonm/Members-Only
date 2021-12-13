@@ -16,13 +16,18 @@
     <% } %>
   </div>
   <form action="/login" method="POST">
-    <label for="username">Username:</label>
+    <label for="username">Email:</label>
+    <% if (email) { %>
     <input
       name="username"
-      placeholder="username"
+      placeholder="email"
       type="text"
       autocomplete="off"
+      value="<%= email %>"
     />
+    <% } else{ %>
+    <input name="username" placeholder="email" type="text" autocomplete="off" />
+    <% } %>
     <label for="password">Password:</label>
     <input
       name="password"
