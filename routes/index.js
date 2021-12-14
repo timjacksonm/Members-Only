@@ -119,14 +119,26 @@ router.get('/newmessage', function (req, res, next) {
 });
 
 /* POST new message page. */
-router.post(
-  '/newmessage',
-  function (req, res, next) {
-    console.log(req);
-    next();
-  },
-  validate('createMessage'),
-  createMessage
-);
+router.post('/newmessage', validate('createMessage'), createMessage);
+
+/* GET join club page */
+router.post('/joinclub', function (req, res, next) {
+  res.render('joinclub');
+});
+
+/* POST join club page */
+router.post('/joinclub', function (req, res, next) {
+  res.redirect('/home');
+});
+
+/* GET become admin page */
+router.post('/becomeadmin', function (req, res, next) {
+  res.render('becomeadmin');
+});
+
+/* POST become admin page */
+router.post('/becomeadmin', function (req, res, next) {
+  res.redirect('/home');
+});
 
 export default router;

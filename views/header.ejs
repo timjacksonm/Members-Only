@@ -17,9 +17,20 @@
       <div class="align-self-center">
         Welcome <%= user._doc.email %>, Status: <%= user._doc.status %>
       </div>
-      <p class="align-self-center">
-        <a href="/logout">logout</a>
-      </p>
+      <div class="flex">
+        <% if (user._doc.status === 'Member') { %>
+        <p class="align-self-center">
+          <a href="/joinclub">Join the club!</a>
+        </p>
+        <% } else if (user._doc.status === 'Club Member') { %>
+        <p class="align-self-center">
+          <a href="/becomeadmin">Become an admin!</a>
+        </p>
+        <% } %>
+        <p class="align-self-center">
+          <a href="/logout">logout</a>
+        </p>
+      </div>
       <% } else { %>
       <p class="align-self-center">
         <a href="/login">login</a>

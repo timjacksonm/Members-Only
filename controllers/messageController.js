@@ -18,16 +18,18 @@ export const retrieveMessages = async (req, res, next) => {
               ],
             },
           ],
-        }).then((result) => {
-          if (result.length) {
-            return result.map((object) => ({
-              username: object.member.email.split('@')[0],
-              role: object.member.status,
-              message: object.message,
-              date: format(object.date, 'Pp'),
-            }));
-          }
-        });
+        })
+          .populate('member')
+          .then((result) => {
+            if (result.length) {
+              return result.map((object) => ({
+                username: object.member.email.split('@')[0],
+                role: object.member.status,
+                message: object.message,
+                date: format(object.date, 'Pp'),
+              }));
+            }
+          });
         break;
       case 'Member':
         messages = await Message.find({
