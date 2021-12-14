@@ -71,7 +71,11 @@ export const retrieveMessages = async (req, res, next) => {
         break;
     }
 
-    res.render('index', { user: req.user || null, messages: messages });
+    res.render('index', {
+      url: req.url,
+      user: req.user || null,
+      messages: messages,
+    });
   } catch (e) {
     next(e);
   }

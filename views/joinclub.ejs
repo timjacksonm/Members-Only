@@ -1,4 +1,4 @@
-<%- include('header', { user: user }) -%>
+<%- include('header', { user: user, url: url }) -%>
 <main>
   <% if (errors) { %>
   <div>
@@ -13,8 +13,8 @@
   <h2 class="flex justify-content-center">
     What is the answer to life, the universe and everything?
   </h2>
-  <form action="" class="form-center">
-    <label for="username">Answer: </label>
+  <form action="/joinclub" method="POST" class="form-center">
+    <label for="answer">Answer: </label>
     <input name="answer" type="text" autocomplete="off" />
     <button type="submit" class="submitBtn">Submit</button>
   </form>

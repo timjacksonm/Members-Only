@@ -98,5 +98,28 @@ export const validate = (method) => {
         body('password').notEmpty().withMessage('Enter a password.').trim(),
       ];
     }
+    case 'becomeClubMember': {
+      return [
+        body('answer')
+          .notEmpty()
+          .withMessage('Enter an answer.')
+          .bail()
+          .trim()
+          .custom((answer) => (answer === 42 || answer === '42' ? true : false))
+          .withMessage('Incorrect answer.'),
+      ];
+    }
+    case 'becomeAdmin': {
+      return [
+        body('answer')
+          .notEmpty()
+          .withMessage('Enter an answer.')
+          .bail()
+          .trim()
+          .toLowerCase()
+          .custom((answer) => (answer === 'palindrome' ? true : false))
+          .withMessage('Incorrect answer.'),
+      ];
+    }
   }
 };

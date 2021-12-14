@@ -18,11 +18,12 @@
         Welcome <%= user._doc.email %>, Status: <%= user._doc.status %>
       </div>
       <div class="flex">
-        <% if (user._doc.status === 'Member') { %>
+        <% if (user._doc.status === 'Member' && url !== '/joinclub') { %>
         <p class="align-self-center">
           <a href="/joinclub">Join the club!</a>
         </p>
-        <% } else if (user._doc.status === 'Club Member') { %>
+        <% } else if (user._doc.status === 'Club Member' && url !==
+        '/becomeadmin') { %>
         <p class="align-self-center">
           <a href="/becomeadmin">Become an admin!</a>
         </p>

@@ -1,4 +1,4 @@
-<%- include('header', { user: user }) -%>
+<%- include('header', { user: user, url: url }) -%>
 <main>
   <% if (errors) { %>
   <div>
@@ -11,10 +11,10 @@
   </div>
   <% } %>
   <h2 class="flex justify-content-center">
-    What is a word, phrase, or sequence that reads the same backward as forward?
+    What is a word, phrase or sequence that reads the same backward as forward?
   </h2>
-  <form action="" class="form-center">
-    <label for="username">Answer: </label>
+  <form action="/becomeadmin" method="POST" class="form-center">
+    <label for="answer">Answer: </label>
     <input name="answer" type="text" autocomplete="off" />
     <button type="submit" class="submitBtn">Submit</button>
   </form>

@@ -2,7 +2,10 @@ import express from 'express';
 import passport from 'passport';
 import { validationResult } from 'express-validator';
 import { validate } from '../middleware/validatesanitize.js';
-import { createMember } from '../controllers/memberController.js';
+import {
+  createMember,
+  promoteMember,
+} from '../controllers/memberController.js';
 import { createDemographic } from '../controllers/demographicController.js';
 import {
   createMessage,
@@ -24,6 +27,7 @@ router.get('/login', function (req, res) {
     res.redirect('/home');
   } else {
     res.render('login', {
+      url: req.url,
       user: null,
       errors: null,
       autherror: null,
@@ -40,6 +44,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.render('login', {
+        url: req.url,
         user: null,
         errors: errors.array(),
         autherror: null,
@@ -55,6 +60,7 @@ router.post(
       }
       if (!user) {
         return res.render('login', {
+          url: req.url,
           user: null,
           errors: null,
           autherror: info,
@@ -83,6 +89,7 @@ router.get('/signup', function (req, res) {
     res.redirect('/home');
   } else {
     res.render('signup', {
+      url: req.url,
       user: null,
       errors: null,
       email: null,
@@ -108,6 +115,7 @@ router.post(
 router.get('/newmessage', function (req, res, next) {
   if (req.user) {
     res.render('newmessage', {
+      url: req.url,
       user: req.user,
       errors: null,
       message: null,
@@ -123,22 +131,26 @@ router.post('/newmessage', validate('createMessage'), createMessage);
 
 /* GET join club page */
 router.get('/joinclub', function (req, res, next) {
-  res.render('joinclub', { user: null, errors: null });
+  if (req.user) {
+    res.render('joinclub', { user: req.user, errors: null, url: req.url });
+  } else {
+    res.redirect('/home');
+  }
 });
 
 /* POST join club page */
-router.post('/joinclub', function (req, res, next) {
-  res.redirect('/home');
-});
+router.post('/joinclub', validate('becomeClubMember'), promoteMember);
 
 /* GET become admin page */
 router.get('/becomeadmin', function (req, res, next) {
-  res.render('becomeadmin', { user: null, errors: null });
+  if (req.user) {
+    res.render('becomeadmin', { user: req.user, errors: null, url: req.url });
+  } else {
+    res.redirect('/home');
+  }
 });
 
 /* POST become admin page */
-router.post('/becomeadmin', function (req, res, next) {
-  res.redirect('/home');
-});
+router.post('/becomeadmin', validate('becomeAdmin'), promoteMember);
 
 export default router;

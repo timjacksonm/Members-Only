@@ -36,3 +36,21 @@ export const createMember = async (req, res, next) => {
     return next(err);
   }
 };
+
+export const promoteMember = async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const string = req.url.split('');
+      string.shift();
+      return res.render(string.join(''), {
+        url: req.url,
+        user: req.user,
+        errors: errors.array(),
+      });
+    }
+    res.redirect('/home');
+  } catch (err) {
+    return next(err);
+  }
+};
