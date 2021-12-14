@@ -49,6 +49,21 @@ export const promoteMember = async (req, res, next) => {
         errors: errors.array(),
       });
     }
+    if (req.user.status === 'Club Member') {
+      //change admin === true
+    }
+    if (req.user.status === 'Member') {
+      //change member to Club Member
+      Member.findByIdAndUpdate(
+        req.user.id,
+        { status: 'Club Member' },
+        function (err) {
+          if (err) {
+            next(err);
+          }
+        }
+      );
+    }
     res.redirect('/home');
   } catch (err) {
     return next(err);
