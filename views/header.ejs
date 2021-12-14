@@ -23,7 +23,7 @@
           <a href="/joinclub">Join the club!</a>
         </p>
         <% } else if (user._doc.status === 'Club Member' && url !==
-        '/becomeadmin') { %>
+        '/becomeadmin' && !user._doc.admin) { %>
         <p class="align-self-center">
           <a href="/becomeadmin">Become an admin!</a>
         </p>

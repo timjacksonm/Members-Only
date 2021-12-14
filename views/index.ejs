@@ -1,9 +1,9 @@
 <%- include('header', { user: user, url: url }) -%>
 <main>
   <% if (user) { %>
-  <a href="/newmessage" class="remove-decoration">
-    <button class="addBtn">+</button>
-  </a>
+  <button class="addBtn">
+    <a href="/newmessage" class="remove-decoration">+</a>
+  </button>
   <% } %>
   <div>
     <% if (messages) { %>

@@ -49,6 +49,7 @@ input {
 }
 
 .addBtn {
+  display: flex;
   font-size: 1.6em;
   width: 1.6em;
   text-align: center;
@@ -62,6 +63,12 @@ input {
 
 .addBtn:hover {
   background-color: rgb(9, 195, 114);
+}
+
+.addBtn a {
+  justify-content: center;
+  margin: 0;
+  color: #fff;
 }
 
 .flex {
