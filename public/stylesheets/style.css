@@ -196,13 +196,15 @@ input {
 .message-container {
   display: flex;
   flex-direction: column;
-  background-color: rgb(42, 46, 53);
   padding: 2em;
   max-width: 50%;
-  margin: 1.5em auto;
   display: flex;
   position: relative;
   border-radius: 20px;
+  min-width: 400px;
+  width: 50%;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .message-description {
@@ -213,4 +215,18 @@ input {
 
 .text {
   overflow-wrap: anywhere;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.offset-children > div:nth-child(even) {
+  background-color: rgb(42, 46, 53);
+}
+
+.offset-children > div:nth-child(odd) {
+  background-color: rgba(42, 46, 53, 0.507);
 }
