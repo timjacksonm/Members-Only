@@ -1,4 +1,5 @@
 import Message from '../models/message.js';
+import { format } from 'date-fns';
 import { validationResult } from 'express-validator';
 
 export const retrieveMessages = async (req, res, next) => {
@@ -19,7 +20,12 @@ export const retrieveMessages = async (req, res, next) => {
           ],
         }).then((result) => {
           if (result.length) {
-            return result;
+            return result.map((object) => ({
+              username: object.member.email.split('@')[0],
+              role: object.member.status,
+              message: object.message,
+              date: format(object.date, 'Pp'),
+            }));
           }
         });
         break;
@@ -30,11 +36,18 @@ export const retrieveMessages = async (req, res, next) => {
               $or: [{ view: 'Members Only' }, { view: 'Public' }],
             },
           ],
-        }).then((result) => {
-          if (result.length) {
-            return result;
-          }
-        });
+        })
+          .populate('member')
+          .then((result) => {
+            if (result.length) {
+              return result.map((object) => ({
+                username: object.member.email.split('@')[0],
+                role: object.member.status,
+                message: object.message,
+                date: format(object.date, 'Pp'),
+              }));
+            }
+          });
         break;
       case 'Public':
         messages = await Message.find({
@@ -45,11 +58,17 @@ export const retrieveMessages = async (req, res, next) => {
           ],
         }).then((result) => {
           if (result.length) {
-            return result;
+            return result.map((object) => ({
+              username: 'anonymous',
+              role: 'anonymous',
+              message: object._doc.message,
+              date: format(object._doc.date, 'PPpp'),
+            }));
           }
         });
         break;
     }
+
     res.render('index', { user: req.user || null, messages: messages });
   } catch (e) {
     next(e);
@@ -69,7 +88,8 @@ export const createMessage = async (req, res, next) => {
       });
     }
     await Message.create({
-      username: req.user._doc._id,
+      member: req.user._doc._id,
+      demographics: req.user.demographics,
       message: message,
       date: new Date(),
       view: view,

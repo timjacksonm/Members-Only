@@ -8,9 +8,14 @@
   <div>
     <% if (messages) { %>
     <div>
-      <% messages.forEach(data => { %>
-      <p><%= data._doc.message %></p>
-      <p><%= data._doc.date %></p>
+      <% messages.forEach(item => { %>
+      <div class="message-container">
+        <div class="message-description">
+          <p>Author: <%= item.username %> Status: <%= item.role %></p>
+          <p><%= item.date %></p>
+        </div>
+        <p class="text"><%= item.message %></p>
+      </div>
       <% }) %>
     </div>
     <% } %>

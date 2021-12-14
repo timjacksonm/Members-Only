@@ -1,9 +1,14 @@
 import mongoose from 'mongoose';
 
 const MessageSchema = new mongoose.Schema({
-  username: {
+  member: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Member',
+    required: true,
+  },
+  demographics: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Demographics',
     required: true,
   },
   message: { type: String, required: true, minLength: 1, maxLength: 50 },

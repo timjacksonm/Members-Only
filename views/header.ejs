@@ -15,7 +15,7 @@
       </h1>
       <% if (user) { %>
       <div class="align-self-center">
-        Welcome <%= user._doc.email %>, Member Status: <%= user._doc.status %>
+        Welcome <%= user._doc.email %>, Status: <%= user._doc.status %>
       </div>
       <p class="align-self-center">
         <a href="/logout">logout</a>
@@ -26,3 +26,5 @@
       </p>
       <% } %>
     </header>
+  </body>
+</html>

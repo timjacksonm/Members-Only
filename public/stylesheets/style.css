@@ -57,6 +57,7 @@ input {
   color: #fff;
   border: 2px solid rgb(9, 195, 114);
   border-radius: 0.8em;
+  margin: auto;
 }
 
 .addBtn:hover {
@@ -190,4 +191,26 @@ input {
   height: 8px;
   border-radius: 50%;
   background: white;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(42, 46, 53);
+  padding: 2em;
+  max-width: 50%;
+  margin: 1.5em auto;
+  display: flex;
+  position: relative;
+  border-radius: 20px;
+}
+
+.message-description {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  overflow-wrap: anywhere;
 }
