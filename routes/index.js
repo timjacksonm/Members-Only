@@ -122,8 +122,8 @@ router.get('/newmessage', function (req, res, next) {
 router.post('/newmessage', validate('createMessage'), createMessage);
 
 /* GET join club page */
-router.post('/joinclub', function (req, res, next) {
-  res.render('joinclub');
+router.get('/joinclub', function (req, res, next) {
+  res.render('joinclub', { user: null, errors: null });
 });
 
 /* POST join club page */
@@ -132,8 +132,8 @@ router.post('/joinclub', function (req, res, next) {
 });
 
 /* GET become admin page */
-router.post('/becomeadmin', function (req, res, next) {
-  res.render('becomeadmin');
+router.get('/becomeadmin', function (req, res, next) {
+  res.render('becomeadmin', { user: null, errors: null });
 });
 
 /* POST become admin page */
