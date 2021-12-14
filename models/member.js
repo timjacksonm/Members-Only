@@ -8,6 +8,7 @@ const MemberSchema = new mongoose.Schema({
   email: { type: String, required: true, lowercase: true, trim: true },
   password: { type: String, required: true, trim: true },
   status: { type: String, required: true, enum: ['Club Member', 'Member'] },
+  admin: { type: Boolean, required: true },
 });
 
 MemberSchema.statics.isUniqueEmail = function isUniqueEmail(string) {

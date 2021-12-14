@@ -28,6 +28,7 @@ export const createMember = async (req, res, next) => {
           email: email,
           password: hashedPassword,
           status: 'Member',
+          admin: false,
         });
         res.redirect('/login');
       }
@@ -51,6 +52,11 @@ export const promoteMember = async (req, res, next) => {
     }
     if (req.user.status === 'Club Member') {
       //change admin === true
+      Member.findByIdAndUpdate(req.user.id, { admin: true }, function (err) {
+        if (err) {
+          next(err);
+        }
+      });
     }
     if (req.user.status === 'Member') {
       //change member to Club Member
