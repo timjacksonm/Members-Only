@@ -1,5 +1,6 @@
 import express from 'express';
 import passport from 'passport';
+import url from 'url';
 import { validationResult } from 'express-validator';
 import { validate } from '../middleware/validatesanitize.js';
 import {
@@ -10,6 +11,7 @@ import { createDemographic } from '../controllers/demographicController.js';
 import {
   createMessage,
   retrieveMessages,
+  deleteMessage,
 } from '../controllers/messageController.js';
 const router = express.Router();
 
@@ -152,5 +154,14 @@ router.get('/becomeadmin', function (req, res, next) {
 
 /* POST become admin page */
 router.post('/becomeadmin', validate('becomeAdmin'), promoteMember);
+
+/* GET delete message page */
+router.get('/delete/:?', function (req, res, next) {
+  const params = url.parse(req.url, true).query;
+  res.render('deletemessage', { item: params, user: req.user, url: req.url });
+});
+
+/* POST delete message page */
+router.post('/delte/:id', deleteMessage);
 
 export default router;

@@ -23,6 +23,7 @@ export const retrieveMessages = async (req, res, next) => {
           .then((result) => {
             if (result.length) {
               return result.map((object) => ({
+                id: object.id,
                 username: object.member.email.split('@')[0],
                 role: object.member.status,
                 message: object.message,
@@ -43,6 +44,7 @@ export const retrieveMessages = async (req, res, next) => {
           .then((result) => {
             if (result.length) {
               return result.map((object) => ({
+                id: object.id,
                 username: object.member.email.split('@')[0],
                 role: object.member.status,
                 message: object.message,
@@ -61,6 +63,7 @@ export const retrieveMessages = async (req, res, next) => {
         }).then((result) => {
           if (result.length) {
             return result.map((object) => ({
+              id: object.id,
               username: 'anonymous',
               role: 'anonymous',
               message: object._doc.message,
@@ -101,6 +104,14 @@ export const createMessage = async (req, res, next) => {
       view: view,
     });
     res.redirect('/home');
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const deleteMessage = async (req, res, next) => {
+  try {
+    console.log(req);
   } catch (err) {
     return next(err);
   }

@@ -10,6 +10,13 @@
     <div class="offset-children center">
       <% messages.forEach(item => { %>
       <div class="message-container">
+        <% if (user && user.admin) { %>
+        <a
+          href="/delete/?id=<%= item.id %>&username=<%= item.username %>&role=<%= item.role %>&date=<%= item.date %>&message=<%= item.message %>"
+          class="delete"
+          >X</a
+        >
+        <% } %>
         <div class="message-description">
           <p>Author: <%= item.username %> Status: <%= item.role %></p>
           <p><%= item.date %></p>
