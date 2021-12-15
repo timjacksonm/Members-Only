@@ -162,6 +162,6 @@ router.get('/delete/:?', function (req, res, next) {
 });
 
 /* POST delete message page */
-router.post('/delte/:id', deleteMessage);
+router.post('/delete/:?', deleteMessage);
 
 export default router;

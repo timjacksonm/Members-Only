@@ -1,4 +1,5 @@
 import Message from '../models/message.js';
+import url from 'url';
 import { format } from 'date-fns';
 import { validationResult } from 'express-validator';
 
@@ -111,7 +112,10 @@ export const createMessage = async (req, res, next) => {
 
 export const deleteMessage = async (req, res, next) => {
   try {
-    console.log(req);
+    const params = url.parse(req.url, true).query;
+    console.log(params);
+    await Message.findByIdAndRemove({ _id: params.id });
+    res.redirect('/home');
   } catch (err) {
     return next(err);
   }
