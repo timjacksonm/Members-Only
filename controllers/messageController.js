@@ -25,7 +25,7 @@ export const retrieveMessages = async (req, res, next) => {
             if (result.length) {
               return result.map((object) => ({
                 id: object.id,
-                username: object.member.email.split('@')[0],
+                username: object.member.username.split('@')[0],
                 role: object.member.status,
                 message: object.message,
                 date: format(object.date, 'Pp'),
@@ -46,7 +46,7 @@ export const retrieveMessages = async (req, res, next) => {
             if (result.length) {
               return result.map((object) => ({
                 id: object.id,
-                username: object.member.email.split('@')[0],
+                username: object.member.username.split('@')[0],
                 role: object.member.status,
                 message: object.message,
                 date: format(object.date, 'Pp'),
@@ -67,8 +67,8 @@ export const retrieveMessages = async (req, res, next) => {
               id: object.id,
               username: 'anonymous',
               role: 'anonymous',
-              message: object._doc.message,
-              date: format(object._doc.date, 'PPpp'),
+              message: object.message,
+              date: format(object.date, 'PPpp'),
             }));
           }
         });
@@ -98,7 +98,7 @@ export const createMessage = async (req, res, next) => {
       });
     }
     await Message.create({
-      member: req.user._doc._id,
+      member: req.user._id,
       demographics: req.user.demographics,
       message: message,
       date: new Date(),

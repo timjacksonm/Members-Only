@@ -9,13 +9,9 @@ export const createMember = async (req, res, next) => {
     if (!errors.isEmpty()) {
       return res.render('signup', {
         user: null,
+        url: req.url,
         errors: errors.array(),
-        email: email,
-        password: password,
-        firstname: firstname,
-        lastname: lastname,
-        state: state,
-        country: country,
+        ...req.body,
       });
     }
 
@@ -25,7 +21,7 @@ export const createMember = async (req, res, next) => {
       } else {
         await Member.create({
           demographics: res.locals.demographicId,
-          email: email,
+          username: email,
           password: hashedPassword,
           status: 'Member',
           admin: false,

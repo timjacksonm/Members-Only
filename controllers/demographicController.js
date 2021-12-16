@@ -8,21 +8,16 @@ export const createDemographic = async (req, res, next) => {
     if (!errors.isEmpty()) {
       return res.render('signup', {
         user: null,
+        url: req.url,
         errors: errors.array(),
-        email: email,
-        password: password,
-        firstname: firstname,
-        lastname: lastname,
-        state: state,
-        country: country,
+        ...req.body,
       });
     }
-
+    const formSubmissionWithInputs = Object.entries(req.body).filter(
+      ([key, value]) => value.length > 0
+    );
     const reference = await Demographics.create({
-      firstname: firstname,
-      lastname: lastname,
-      state: state,
-      country: country,
+      ...formSubmissionWithInputs,
     });
     res.locals.demographicId = reference;
     next();

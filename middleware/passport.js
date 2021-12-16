@@ -1,6 +1,6 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-import User from '../models/member.js';
+import Member from '../models/member.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -8,7 +8,8 @@ dotenv.config();
 function strategy(req, res, next) {
   passport.use(
     new LocalStrategy((username, password, done) => {
-      User.findOne({ username: username }, (err, user) => {
+      console.log(username, password);
+      Member.findOne({ username: username }, (err, user) => {
         if (err) {
           return done(err);
         }
@@ -33,7 +34,7 @@ function strategy(req, res, next) {
   });
 
   passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
+    Member.findById(id, function (err, user) {
       done(err, user);
     });
   });
