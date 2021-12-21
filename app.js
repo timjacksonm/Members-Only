@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import passport from 'passport';
 import session from 'express-session';
+import compression from 'compression';
 import errorHandler from './middleware/errorhandler.js';
 import connectMongooseToDB from './middleware/mongodb.js';
 import routes from './routes/index.js';
@@ -11,9 +12,12 @@ import path from 'path';
 import strategy from './middleware/passport.js';
 const __dirname = path.resolve();
 import dotenv from 'dotenv';
+import helmet from 'helmet';
 dotenv.config();
 
 const app = express();
+
+app.use(helmet());
 
 //Set up mongoose connection
 app.use(connectMongooseToDB);
@@ -38,6 +42,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
+
+app.use(compression());
 
 // imports all of the routes from ./routes/index.js
 app.use(routes);
