@@ -5,7 +5,7 @@ import { validationResult } from 'express-validator';
 export const createMember = async (req, res, next) => {
   try {
     const errors = validationResult(req);
-    const { email, password, firstname, lastname, state, country } = req.body;
+    const { email, password } = req.body;
     if (!errors.isEmpty()) {
       return res.render('signup', {
         user: null,
