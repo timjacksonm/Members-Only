@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "15.13.0"
+  },
   "type": "module",
   "name": "members-only",
   "version": "0.0.0",
