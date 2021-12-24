@@ -36,8 +36,12 @@
 ## Summary
 
    <p>
-Working on this project helped solidify everythign I have learned so far with MongoDB and also Express. Starting to feel a lot more confident and enjoyed working on this project. Was interesting learning the whole picture that goes on behinds the scenes. There wasn't anything in particular that was most difficult. Using VSCode JavaScript Debug Terminal was exceedingly helpful. Being able to set break points and view all my variables in a scope within a http request helped me understand fully what was going on. Understanding headers and sending a http response became more clear aswell. Secruity using bycrpt was easy enough. The only issue I had was using passportJS and not naming my form correctly so the api could use the data properly. 
+Working on this project helped solidify everything I have learned so far with MongoDB and Express. Starting to feel a lot more confident and enjoyed working on this project. Was interesting learning the whole picture that goes on behinds the scenes. There wasn't anything in particular that was most difficult. Using VSCode JavaScript Debug Terminal was exceedingly helpful. Being able to set break points and view all my variables in a scope within a http request helped me understand fully what was going on. Secruity using bycrpt was easy enough. The only issue I had was my sign in form and passportJS. My issue ended up being I didn't name my form correctly so the api could use the data.
+    </p>
+    <p>
 If you are stuck and can't find the answer for the club member question. Its "42". From the movie The Hitchhiker's Guide to the Galaxy.
+    </p>
+    <p>
 Admin answer is "Palindrome".
    </p>
 
