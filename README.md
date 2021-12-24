@@ -1,5 +1,5 @@
 <h1 align="center">
-   <image src="/src/assets/readmelogo.png" width="50%"> 
+   <image src="/public/images/logomembersonly.png" width="50%"> 
 </h1>
 
 <h4 align="center">Members-Only. I used Node.js, Express & Ejs JavaScript templating for this project.</h4>
@@ -18,7 +18,7 @@
 <details>
   <summary>Show Images</summary>
 
-<image src="">
+<image src="/public/images/demomembersonly.gif">
 
 </details>
 
